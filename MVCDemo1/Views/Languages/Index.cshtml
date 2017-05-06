@@ -1,0 +1,13 @@
+﻿@model MVCDemo1.Models.LanguagesModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+@using (Html.BeginForm())
+{
+    @Html.ListBoxFor(x => x.SelectedLanguages, Model.LanguagesINLanguagesClass);
+    <br />
+    <input type="submit" value="submit" />
+}
+

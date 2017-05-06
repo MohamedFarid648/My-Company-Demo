@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "AllEmployee4UsingAjax";
+}
+<script src="~/scripts/jquery-1.10.2.min.js"></script>
+<script src="~/scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script type="text/javascript" language="javascript">
+    function cleardiv() {
+        $("#CallPartialViewHere").empty();
+    }
+    function numOfRows() {
+        alert(($("#EmployeesAjaxTable tr").length - 1) + ' rows retrieved');
+    }@*length - 1 : to don't count this row <tr><th></th> <th></th> ...</tr>*@
+</script>
+<h2>AllEmployee4UsingAjax</h2>
+@*
+   
+    @Html.ActionLink("All", "AllEmployeesPartialView")<span style="color:red">|</span>
+    @Html.ActionLink("First5", "First5PartialView")<span style="color:red">|</span>
+    @Html.ActionLink("Last5", "Last5PartialView")<span style="color:red">|</span>
+
+*@
+
+@Ajax.ActionLink("Order By Name", "OrderByNamePartialView", new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "CallPartialViewHere", InsertionMode=InsertionMode.Replace, LoadingElementId="ImageForLoading", OnBegin = "cleardiv", OnSuccess = "numOfRows" })
+<span style="color:red">|</span>
+@Ajax.ActionLink("Order By ID", "OrderByIDPartialView", new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "CallPartialViewHere", InsertionMode=InsertionMode.Replace, LoadingElementId = "ImageForLoading", OnBegin = "cleardiv", OnSuccess= "numOfRows"})
+<span style="color:red">|</span>
+@Ajax.ActionLink("Order By Age", "OrderByAgePartialView", new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "CallPartialViewHere", InsertionMode=InsertionMode.Replace , LoadingElementId = "ImageForLoading", OnBegin = "cleardiv", OnSuccess = "numOfRows" })
+
+
+
+<div id="ImageForLoading" style="display:none">
+    <img src="~/Photos/spiffygif_30x30.gif" />
+    @*spiffygif_30x30.gif from  spiffygif.com/
+    *@
+</div>
+<div id="CallPartialViewHere"></div>
+

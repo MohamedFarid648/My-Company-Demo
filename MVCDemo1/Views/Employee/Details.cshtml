@@ -1,0 +1,73 @@
+﻿@model MVCDemo1.Models.Employee
+@using MVCDemo1.Models
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+@*
+    <table>
+        <tr>
+            <td>Name:</td>
+            <td>@Model.Name</td>
+        </tr>
+        <tr>
+            <td>Email:</td>
+            <td>@Model.Email</td>
+        </tr>
+        <tr>
+            <td>Address:</td>
+            <td>@Model.Address </td>
+        </tr>
+        <tr>
+            <td>DateOfBirth:</td>
+            <td>@Model.DateOfBirth </td>
+        </tr>
+        <tr>
+            <td>Gender:</td>
+            <td>@Model.Gender </td>
+        </tr>
+        <tr>
+            <td>DepartmentID:</td>
+            <td>@Department.ReturnDepName(Model.DepartmentID)</td>
+        </tr>
+        <tr>
+            <td>Photo:</td>
+       <td>
+                <img src="@Url.Content(Model.Photo)" alt="@Model.PhotoText" height="200" width="200" />
+                @* @Html.Image(Model.Photo,Model.PhotoText)
+            Using My own Html.Image ^_^*@@*
+
+            </td>
+            </tr>
+        </table>
+
+*@
+    <p>
+        @Html.ActionLink("Back To Department Emplyees", "Index", "Employee",new { depId=Model.DepartmentID}, null)
+    </p>
+
+    <table>
+        <tr>
+            <td>
+               
+             @*<img src="@Url.Content(Model.Photo)" alt="@Model.PhotoText" height="100" width="100" />*@ 
+               @Html.Image(Model.Photo,Model.PhotoText,200,200)
+     
+                
+            </td>
+            
+                 <td>
+                    <table>
+                    <tr><td>@Html.DisplayNameFor(x=>x.Name)</td><td style="text-align:center;">@Html.DisplayFor(x => x.Name)</td></tr>
+                    <tr><td>@Html.DisplayNameFor(x => x.Email)</td><td style="text-align:center;">@Html.DisplayFor(x => x.Email)</td></tr>
+                    <tr><td>@Html.DisplayNameFor(x => x.Gender)</td><td style="text-align:center;">@Html.DisplayFor(x => x.Gender)</td></tr>
+                    <tr><td>@Html.DisplayNameFor(x => x.DateOfBirth)</td><td style="text-align:center;">@Html.DisplayFor(x => x.DateOfBirth)</td></tr>
+                    <tr><td>@Html.DisplayNameFor(x => x.DepartmentID)</td><td style="text-align:center;">@Html.DisplayName(Department.ReturnDepName(Model.DepartmentID))</td></tr>
+
+
+                </table>
+            </td>
+        </tr>
+    </table>

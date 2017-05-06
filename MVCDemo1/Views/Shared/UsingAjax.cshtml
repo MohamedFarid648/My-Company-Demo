@@ -1,0 +1,68 @@
+﻿@using MVCDemo1.Models
+@*@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<MVCDemo1.Models.Employee>*@
+@model IEnumerable<MVCDemo1.Models.Employee>
+
+
+
+<table class="table" border="1" id="EmployeesAjaxTable">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateOfBirth)
+        </th>
+        <th>
+            @Html.DisplayName("Department Name")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Photo)
+        </th>
+       
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gender)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateOfBirth)
+        </td>
+        <td>
+            @Department.ReturnDepName(item.DepartmentID)
+        </td>
+        <td>
+            @Html.Image(item.Photo,item.PhotoText,50,50)
+             @*  <img src="@Url.Content(item.Photo)" alt="@item.PhotoText" height="100" width="100" />*@
+
+
+            </td>
+
+
+        </tr>
+    }
+
+    </table>
+@*
+    @Html.PagedListPager(Model, page => Url.Action("AllEmployeesPartialView", new { page }),
+        new PagedListRenderOptions()
+        {
+            Display = PagedListDisplayMode.IfNeeded,
+            DisplayPageCountAndCurrentLocation = true,
+            //DisplayItemSliceAndTotal = true
+        })*@

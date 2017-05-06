@@ -1,0 +1,106 @@
+﻿@using MVCDemo1.Models
+@using PagedList;
+@using PagedList.Mvc;
+
+@model IPagedList<MVCDemo1.Models.Employee>
+
+@{
+    ViewBag.Title = "AllEmployees";
+}
+
+<h2>AllEmployees</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().DateOfBirth)
+        </th>
+       
+        <th>
+           Department Name
+        </th>
+        <th>Actions</th>
+    </tr>
+
+@foreach (var item in Model) {
+   using (Html.BeginForm("Delete", "Employee",new {id=item.ID })) { 
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gender)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateOfBirth)
+        </td>
+       
+        <td>
+         @Department.ReturnDepName(item.DepartmentID)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            <input type="submit" value="Delete"
+                    onclick="return confirm('Are you want to delete employee :@item.Name')"/>
+        </td>
+    </tr>
+    
+    }
+}
+
+</table>
+
+@Html.PagedListPager(Model, page => Url.Action("AllEmployees", new { page }),
+    new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded,
+                                   DisplayPageCountAndCurrentLocation = true,
+                                   //DisplayItemSliceAndTotal = true
+    })
+                                    @*DisplayPageCountAndCurrentLocation=ex:page 1 of 3
+                                      DisplayItemSliceAndTotal=ex:Showing items 1 through 3 of 10.
+                                      page => Url.Action("AllEmployees",new { page }:
+                                       To make url :http://localhost:56341/?page=1,http://localhost:56341/?page=2
+                                    *@
+
+<br/>
+<br />
+<p>
+    @Html.ActionLink("Back To Departments", "Index", "Department")
+</p>
+
+<br />
+<p>
+
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Total</th>
+        </tr>
+
+        @foreach (string[] x in ViewBag.departmentTotal)
+        {
+            <tr>
+                <td>@x[0]</td>
+                <td>@x[1]</td>
+            </tr>
+        }
+
+    </table>
+</p>
+<br />
+
